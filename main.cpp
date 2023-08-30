@@ -1,12 +1,11 @@
 #include <iostream>
-#include <fstream>
+#include "Solver/file_reader.cpp"
 
 
 int main(){
     std::ios_base::sync_with_stdio(false); 
-    
-    std::ofstream myfile;
-    myfile.open ("examples/ex1.txt");
+        file_reader reader;
+        reader.read_file("examples/ex1.txt");
 
-    return 0;
+        return 0;
 }

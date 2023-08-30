@@ -5,4 +5,4 @@ The examples are text files because this allows users to input problems without 
 Also, the inputs are intentionally not very consistent with spaces because this is what is bound to happen when used.
 Examples can be found in the examples folder.
 ### Form
-The first line is the formula which is to be maximized. variables start with letters (e.e., x, y, x2, ...).
+The first line is the formula which is to be maximized. Consecutive lines are for constraints. Variables start with letters (e.e., x, y, x2, ...).
