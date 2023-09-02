@@ -165,15 +165,12 @@ private:
                         // = only do if not 0, this would not hurt, but -0 looks stupid
                     }
                 }
-
-                
             }
         }        
 
 
         // add slack variables to a
         for(int i = 0; i < a.size(); ++i) a[i][variables.size() + i] = 1;
-
 
         // append slack variables to variables for readability
         for(int i = 0; i < num_lines-1; ++i){
@@ -195,14 +192,13 @@ public:
          * 
          */
         std::cout << "variables: " << std::endl;
-        for (auto i: variables) std::cout << i << ' ';
+        for (auto i: variables) std::cout << i << '\t';
         std::cout << "right_side"<< std::endl;
         std::cout << "maximize: " << std::endl;
-        for (auto i: c) std::cout << i << ' ';
+        for (auto i: c) std::cout << i << '\t';
         std::cout << std::endl << "constraints:"<< std::endl;
         for(int j = 0; j < a.size(); ++j){
-            for (auto i: a[j]) std::cout << i << ' ';
-
+            for (auto i: a[j]) std::cout << i << '\t';
             std::cout << "= "<< b[j] << std::endl;
         }
 
@@ -225,8 +221,6 @@ public:
         // create output matrix (vector)
         std::tuple<std::vector<std::vector<float>>, std::vector<float>, 
                 std::vector<float> > problem = create_problem(num_lines, text, variables);
-
-
         
         std::cout << "maximize: " << text <<  std::endl;
         return {variables, problem};
