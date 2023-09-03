@@ -28,12 +28,11 @@ private:
             myfile.read(buffer, length);
 
             // cut off trailing \n
-            while(buffer[length-1] == '\n'){
-                --length;
-            }
+            while(buffer[length-1] == '\n') --length;
+            
             buffer[length] = '\0';
             
-            //std::cout << "maximize: " << buffer <<  std::endl;
+            std::cout << "maximize: " << buffer <<  std::endl <<  std::endl;
 
             myfile.close();
             std::string res = buffer;
@@ -126,9 +125,7 @@ private:
                     //std::cout << ministr << std::endl;
                     if(ministr == "") a[constraint][i] = 1;
                     else if(ministr == "-") a[constraint][i] = -1;
-                    else{
-                        a[constraint][i] = std::stof(ministr);// add multiplier to c vector
-                    }
+                    else a[constraint][i] = std::stof(ministr);// add multiplier to c vector
                 }
             }
         }
@@ -146,9 +143,7 @@ private:
                     //std::cout << ministr << std::endl;
                     if(ministr == "") c[constraint] = 1;
                     else if(ministr == "-") c[constraint] = -1;
-                    else{
-                        c[constraint] = std::stof(ministr);// add multiplier to c vector
-                    }
+                    else c[constraint] = std::stof(ministr);// add multiplier to c vector
                 }
                 else{
                     std::regex reg_rm_var(bigger_smaller_regex_str);
@@ -156,9 +151,8 @@ private:
                     //std::cout << ministr << std::endl;
                     if(ministr == "") c[constraint] = -1;
                     else if(ministr == "-") c[constraint] = 1;
-                    else{
-                        c[constraint] = - std::stof(ministr);// add multiplier to c vector
-                    }
+                    else c[constraint] = - std::stof(ministr);// add multiplier to c vector
+                    
                     // now fix this row:
                     for(int k = 0; k < a[0].size(); ++k){
                         if (a[constraint][k])a[constraint][k] *= -1; 
@@ -173,9 +167,7 @@ private:
         for(int i = 0; i < a.size(); ++i) a[i][variables.size() + i] = 1;
 
         // append slack variables to variables for readability
-        for(int i = 0; i < num_lines-1; ++i){
-            variables.push_back("slack"+std::to_string(i));
-        }
+        for(int i = 0; i < num_lines-1; ++i) variables.push_back("slack"+std::to_string(i));
         
         show_problem(variables, a, b, c);
 
@@ -199,12 +191,17 @@ public:
         std::cout << std::endl << "constraints:"<< std::endl;
         for(int j = 0; j < a.size(); ++j){
             for (auto i: a[j]) std::cout << i << '\t';
-            std::cout << "= "<< b[j] << std::endl;
+            std::cout << "= "<< b[j] << std::endl <<  std::endl;
         }
 
     }
     std::tuple<std::vector<std::string>, std::tuple<std::vector<std::vector<float>>, std::vector<float>, std::vector<float> >>
              read_file(const std::string& input_path){
+        /**
+         * @brief reads the file from the inpit path and returns the variables, \ 
+         * and the vectors a(left side of constraints), b(right side of constraints), c(formula to optimize) in standard form 
+         * 
+         */
         std::string text = get_text(input_path);
 
         int num_lines = std::count( text.begin(), text.end(), '\n' ) +1;// undercounts by 1, is probably thechnically an uint
@@ -222,7 +219,7 @@ public:
         std::tuple<std::vector<std::vector<float>>, std::vector<float>, 
                 std::vector<float> > problem = create_problem(num_lines, text, variables);
         
-        std::cout << "maximize: " << text <<  std::endl;
+        //std::cout << "maximize: " << text <<  std::endl;
         return {variables, problem};
     }
 };

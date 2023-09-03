@@ -4,8 +4,8 @@
 
 int main(){
     std::ios_base::sync_with_stdio(false); 
-        file_reader reader;
-        reader.read_file("examples/ex1.txt");
+    file_reader reader;
+    reader.read_file("examples/ex1.txt");
 
-        return 0;
+    return 0;
 }
