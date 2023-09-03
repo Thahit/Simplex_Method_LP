@@ -6,17 +6,17 @@ Also, the inputs are intentionally not very consistent with spaces etc. because 
 Examples can be found in the examples folder.
 
 ### Form
-The first line is the formula which is to be maximized. Consecutive lines are for constraints. Variables start with letters (e.g., x, y, x2, ...). Each variable should only appear once per line, otherwise the first occurrence is taken. Variables belong to the left side of constraints. Either use <= or >= constraints (= constraints can be built by adding both a <= and a >= constraint). The non-negativity constraints x >= 0 are implied by the program and don't need to be added.
+The first line is the formula which is to be maximized. Consecutive lines are for constraints. Variables start with letters (e.g., x, y, x2, ...). Each variable should only appear once per line, otherwise the first occurrence is taken. Variables belong to the left side of constraints. Either use "<=" or ">=" for constraints (= constraints can be built by adding both a <= and a >= constraint). The non-negativity constraints "x >= 0" are implied by the program and don't need to be added.
 
 ### solutions of the examples:
 The true solutions and the results of the solver are the same:
-ex1: 10400
-ex2: 0.6
-ex3: unbounded
-ex4: no solution
+- ex1: 10400
+- ex2: 0.6
+- ex3: unbounded
+- ex4: no solution
 
 ## Todo
 Possible improvements:
-- more flexible variable selection that selects the bet improvement but can detect cycles and change to a save selector.
+- more flexible variable selection that selects the best improvement but can detect cycles and change to the save selector that has already been implemented.
 - maybe draw graph if 2d
 - maybe also return variable assignment
