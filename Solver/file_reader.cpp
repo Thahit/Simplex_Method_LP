@@ -10,11 +10,11 @@
 
 class file_reader{
 private:
+    /**
+     * @brief reads the file from the address described in input_path, and returns a char* of the content
+     * 
+     */
     std::string get_text(const std::string& input_path){
-        /**
-         * @brief reads the file from the address described in input_path, and returns a char* of the content
-         * 
-         */
         std::ifstream myfile;
         myfile.open(input_path);
         if (myfile) {
@@ -51,11 +51,11 @@ private:
         return NULL;
     }
 
+    /**
+     * @brief find all variables([a-zA-Z][a-zA-Z0-9]*) in the text
+     * 
+     */
     std::vector<std::string> find_all_variables(std::string &text){
-        /**
-         * @brief find all variables([a-zA-Z][a-zA-Z0-9]*) in the text
-         * 
-         */
         const std::regex r("[a-zA-Z][a-zA-Z0-9]*");  
         std::smatch sm;
         std::string text_cp = text;
@@ -72,14 +72,13 @@ private:
         return variables;
     }
 
+    /**
+     * @brief chreate a format the solver can work with
+     * 
+     */
     std::tuple<std::vector<std::vector<float>>, std::vector<float>, std::vector<float> >  
                         create_problem(const int &num_lines, std::string &text,
                         std::vector<std::string> &variables){
-        /**
-         * @brief chreate a format the solver can work with
-         * 
-         */
-        
         // one col per line in the problem - the objective
         // one row per variable + slack variable(= number of lines -1) 
         std::vector<std::vector<float>> a(num_lines - 1, std::vector<float>(variables.size() + num_lines-1, 0.));
@@ -175,14 +174,14 @@ private:
     }
 
 public:
+    /**
+     * @brief print the current problem in a somewhat readable form
+     * 
+     */
     void show_problem(const std::vector<std::string> &variables,
                     std::vector<std::vector<float>> &a,
                     std::vector<float> &b, std::vector<float> &c
                     ){
-        /**
-         * @brief print the current problem in a somewhat readable form
-         * 
-         */
         std::cout << "variables: " << std::endl;
         for (auto i: variables) std::cout << i << '\t';
         std::cout << "right_side"<< std::endl;
@@ -195,13 +194,14 @@ public:
         }
 
     }
+    /**
+     * @brief reads the file from the inpit path and returns the variables,  
+     * and the vectors a(left side of constraints), b(right side of constraints), c(formula to optimize) in standard form 
+     * 
+     */
     std::tuple<std::vector<std::string>, std::tuple<std::vector<std::vector<float>>, std::vector<float>, std::vector<float> >>
              read_file(const std::string& input_path){
-        /**
-         * @brief reads the file from the inpit path and returns the variables, \ 
-         * and the vectors a(left side of constraints), b(right side of constraints), c(formula to optimize) in standard form 
-         * 
-         */
+        
         std::string text = get_text(input_path);
 
         int num_lines = std::count( text.begin(), text.end(), '\n' ) +1;// undercounts by 1, is probably thechnically an uint
