@@ -129,7 +129,7 @@ private:
             }
         }
 
-        // now c
+        // now b
         std::string bigger_smaller_regex_str = "[<>]=";
         for(int constraint = 0; constraint<a.size(); ++constraint){
             std::regex reg_find_left_side(bigger_smaller_regex_str + number_regex_string); // find var with multiplier
@@ -140,17 +140,17 @@ private:
                     std::regex reg_rm_var(bigger_smaller_regex_str);
                     ministr = std::regex_replace(ministr, reg_rm_var, "");
                     //std::cout << ministr << std::endl;
-                    if(ministr == "") c[constraint] = 1;
-                    else if(ministr == "-") c[constraint] = -1;
-                    else c[constraint] = std::stof(ministr);// add multiplier to c vector
+                    if(ministr == "") b[constraint] = 1;
+                    else if(ministr == "-") b[constraint] = -1;
+                    else b[constraint] = std::stof(ministr);// add multiplier to c vector
                 }
                 else{
                     std::regex reg_rm_var(bigger_smaller_regex_str);
                     ministr = std::regex_replace(ministr, reg_rm_var, "");
                     //std::cout << ministr << std::endl;
-                    if(ministr == "") c[constraint] = -1;
-                    else if(ministr == "-") c[constraint] = 1;
-                    else c[constraint] = - std::stof(ministr);// add multiplier to c vector
+                    if(ministr == "") b[constraint] = -1;
+                    else if(ministr == "-") b[constraint] = 1;
+                    else b[constraint] = - std::stof(ministr);// add multiplier to c vector
                     
                     // now fix this row:
                     for(int k = 0; k < a[0].size(); ++k){
