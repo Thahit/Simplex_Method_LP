@@ -14,3 +14,9 @@ ex1: 10400
 ex2: 0.6
 ex3: unbounded
 ex4: no solution
+
+## Todo
+Possible improvements:
+- more flexible variable selection that selects the bet improvement but can detect cycles and change to a save selector.
+- maybe draw graph if 2d
+- maybe also return variable assignment
