@@ -1,11 +1,11 @@
 #include <iostream>
-#include "Solver/file_reader.cpp"
+
+#include "Solver/solver.cpp"
 
 
 int main(){
     std::ios_base::sync_with_stdio(false); 
-    file_reader reader;
-    reader.read_file("examples/ex1.txt");
-
+    solver mySolver("examples/ex2.txt");
+    float solution = mySolver.solve();
     return 0;
 }
