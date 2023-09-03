@@ -37,7 +37,7 @@ private:
             myfile.close();
             std::string res = buffer;
 
-            free(buffer);// cleanup memory (don't know if this gets everything)
+            //free(buffer);// cleanup memory (don't know if this gets everything)
 
             return res;
         }
@@ -104,7 +104,7 @@ private:
                 std::string ministr = sm[0];
                 ministr = std::regex_replace(ministr, reg_rm_var, "");
                 //std::cout << ministr << std::endl;
-                if(ministr == "")c[i] = 1;
+                if(ministr == "" || ministr == "+")c[i] = 1;
                 else if(ministr == "-")c[i] = -1;
                 else{
                     c[i] = std::stof(ministr);// add multiplier to c vector
@@ -122,7 +122,7 @@ private:
                     std::string ministr = sm[0];
                     ministr = std::regex_replace(ministr, reg_rm_var, "");
                     //std::cout << ministr << std::endl;
-                    if(ministr == "") a[constraint][i] = 1;
+                    if(ministr == "" || ministr == "+") a[constraint][i] = 1;
                     else if(ministr == "-") a[constraint][i] = -1;
                     else a[constraint][i] = std::stof(ministr);// add multiplier to c vector
                 }
@@ -136,19 +136,16 @@ private:
             if(std::regex_search (lines[constraint+1].cbegin(), lines[constraint+1].cend(), sm, reg_find_left_side)){// find var
                 // only <= is ok, otherwise we need to multiply everythig with -1
                 std::string ministr = sm[0];
+                std::regex reg_rm_var(bigger_smaller_regex_str);
+                ministr = std::regex_replace(ministr, reg_rm_var, "");
+                //std::cout << ministr << std::endl;
                 if(ministr[0] == '<'){// good
-                    std::regex reg_rm_var(bigger_smaller_regex_str);
-                    ministr = std::regex_replace(ministr, reg_rm_var, "");
-                    //std::cout << ministr << std::endl;
-                    if(ministr == "") b[constraint] = 1;
+                    if(ministr == "" || ministr == "+") b[constraint] = 1;
                     else if(ministr == "-") b[constraint] = -1;
                     else b[constraint] = std::stof(ministr);// add multiplier to c vector
                 }
                 else{
-                    std::regex reg_rm_var(bigger_smaller_regex_str);
-                    ministr = std::regex_replace(ministr, reg_rm_var, "");
-                    //std::cout << ministr << std::endl;
-                    if(ministr == "") b[constraint] = -1;
+                    if(ministr == "" || ministr == "+") b[constraint] = -1;
                     else if(ministr == "-") b[constraint] = 1;
                     else b[constraint] = - std::stof(ministr);// add multiplier to c vector
                     
