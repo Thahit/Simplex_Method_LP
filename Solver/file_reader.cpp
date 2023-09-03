@@ -137,14 +137,16 @@ private:
                 // only <= is ok, otherwise we need to multiply everythig with -1
                 std::string ministr = sm[0];
                 std::regex reg_rm_var(bigger_smaller_regex_str);
-                ministr = std::regex_replace(ministr, reg_rm_var, "");
-                //std::cout << ministr << std::endl;
                 if(ministr[0] == '<'){// good
+                    ministr = std::regex_replace(ministr, reg_rm_var, "");
+                    //std::cout << ministr << std::endl;
                     if(ministr == "" || ministr == "+") b[constraint] = 1;
                     else if(ministr == "-") b[constraint] = -1;
                     else b[constraint] = std::stof(ministr);// add multiplier to c vector
                 }
                 else{
+                    ministr = std::regex_replace(ministr, reg_rm_var, "");
+                    //std::cout << ministr << std::endl;
                     if(ministr == "" || ministr == "+") b[constraint] = -1;
                     else if(ministr == "-") b[constraint] = 1;
                     else b[constraint] = - std::stof(ministr);// add multiplier to c vector
